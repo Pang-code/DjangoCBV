@@ -1,3 +1,14 @@
+###  FBV
+GET http://127.0.0.1:8080/books/
+Accept: application/json
+
+###  FBV
+POST http://127.0.0.1:8080/books/
+Accept: application/json
+
+
+### CBV
+
 ### get
 GET http://127.0.0.1:8080/book/
 Accept: application/json
@@ -17,3 +28,5 @@ DELETE http://127.0.0.1:8080/book/
 Accept: application/json
 
 ###
+
+

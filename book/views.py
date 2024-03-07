@@ -13,7 +13,7 @@ def book(request):
     :return:
     """
     if request.method == "GET":
-        return HttpResponse("get")
+        return HttpResponse("get method")
     else:
         return HttpResponse("other method")
 
