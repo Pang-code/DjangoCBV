@@ -34,3 +34,27 @@ class BookView(View):
 
     def delete(self, request):
         return HttpResponse("del")
+
+
+from rest_framework.views import APIView
+
+
+class BookAPIView(APIView):
+    """
+    cbv REST APIVIEW
+    """
+
+    def get(self, request):
+        print("query参数：", request.query_params)
+
+        return HttpResponse("get APIView")
+
+    def post(self, request):
+        print("body参数：", request.data)
+        return HttpResponse("post APIView")
+
+    def put(self, request):
+        return HttpResponse("put APIView")
+
+    def delete(self, request):
+        return HttpResponse("del APIView")

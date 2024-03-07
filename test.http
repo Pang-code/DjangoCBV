@@ -27,6 +27,29 @@ Accept: application/json
 DELETE http://127.0.0.1:8080/book/
 Accept: application/json
 
+
+### CBV   rest APIView
+
+### get
+GET http://127.0.0.1:8080/bookAPIview/?name=pcw&age=20
+Accept: application/json
+
+
+### POST
+POST http://127.0.0.1:8080/bookAPIview/
+Accept: application/json
+
+{"name": "pcw"}
+
+### PUT
+PUT http://127.0.0.1:8080/bookAPIview/
+Accept: application/json
+
+
+### DEL
+DELETE http://127.0.0.1:8080/bookAPIview/
+Accept: application/json
+
 ###
 
 
