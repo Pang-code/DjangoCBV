@@ -45,6 +45,7 @@ Accept: application/json
 PUT http://127.0.0.1:8080/bookAPIview/
 Accept: application/json
 
+{"name": "pcw"}
 
 ### DEL
 DELETE http://127.0.0.1:8080/bookAPIview/

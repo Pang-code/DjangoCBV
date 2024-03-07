@@ -54,6 +54,10 @@ class BookAPIView(APIView):
         return HttpResponse("post APIView")
 
     def put(self, request):
+        print("原生view request :", request._request)
+        print("原生view request path:", request._request.path)
+        print("原生view request body:", request._request.body)
+        print("原生view request method:", request._request.method)
         return HttpResponse("put APIView")
 
     def delete(self, request):
