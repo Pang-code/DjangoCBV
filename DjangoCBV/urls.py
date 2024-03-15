@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('books/', views.book),
     path('book/', views.BookView.as_view()),
-    path('bookAPIview/', views.BookAPIView.as_view())
+    path('bookAPIview/', views.BookAPIView.as_view()),
+    path('bookview/', views.BookViewToModels.as_view())
 ]

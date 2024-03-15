@@ -62,3 +62,22 @@ class BookAPIView(APIView):
 
     def delete(self, request):
         return HttpResponse("del APIView")
+
+
+from .models import BookInfo
+from rest_framework.response import Response
+from .serializers import BookSerializers
+
+
+class BookViewToModels(APIView):
+    def get(self, request):
+        book_list = BookInfo.objects.all()
+        # book_list模型类 需要序列化
+        # instance 序列化, data 反序列化  many 是否多个模型类
+        serializers = BookSerializers(instance=book_list, many=True)
+        print(serializers.data)
+        # return HttpResponse(serializers.data)  #django自带的响应类 有序列表OrderedDict
+        return Response(serializers.data)  # json 数据
+
+    def post(self, request):
+        pass
