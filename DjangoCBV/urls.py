@@ -19,6 +19,7 @@ from book import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('version/', views.version),
     path('books/', views.book),
     path('book/', views.BookView.as_view()),
     path('bookAPIview/', views.BookAPIView.as_view()),

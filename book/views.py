@@ -4,6 +4,13 @@ from django.shortcuts import render
 # Create your views here.
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
+from django.apps import apps
+
+MY_APP_VERSION = apps.get_app_config('book').version
+
+
+def version(request):
+    return HttpResponse(MY_APP_VERSION)
 
 
 def book(request):
