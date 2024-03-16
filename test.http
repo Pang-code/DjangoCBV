@@ -63,3 +63,36 @@ Accept: application/json
 ### get
 GET http://127.0.0.1:8080/bookview/
 Accept: application/json
+
+
+###
+POST http://127.0.0.1:8080/bookview/
+Accept: application/json
+
+{
+    "title": "linux学习手册",
+    "price": 119,
+    "pub_date": "2009-08-13"
+}
+
+
+
+###
+GET http://127.0.0.1:8080/bookview/6
+Accept: application/json
+
+
+###
+PUT http://127.0.0.1:8080/bookview/6
+Accept: application/json
+
+{
+    "title": "linux学习宝典2"
+}
+
+
+###
+DELETE http://127.0.0.1:8080/bookview/5
+Accept: application/json
+
+
