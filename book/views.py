@@ -7,10 +7,12 @@ from django.views.decorators.csrf import csrf_exempt
 from django.apps import apps
 
 MY_APP_VERSION = apps.get_app_config('book').version
+from book.apps import BookConfig
 
 
 def version(request):
-    return HttpResponse(MY_APP_VERSION)
+    # return HttpResponse(MY_APP_VERSION)
+    return HttpResponse(BookConfig.version)
 
 
 def book(request):
