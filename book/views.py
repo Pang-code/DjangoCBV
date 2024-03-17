@@ -186,18 +186,15 @@ class PublishDetailViewToModelsGenericAPIView(GenericAPIView):
 
         return Response(serializer.data)
 
-    def put(self, request, id):
+    def put(self, request, pk):
         # 获取
         print(request.data)  # 请求参数
-        update_book = BookInfo.objects.get(pk=id)  # 获取数据库准备修改的数据
+        # update_book = BookInfo.objects.get(pk=id)  # 获取数据库准备修改的数据
         # 校验
-        serializer = BookUpdateSerializers(instance=update_book, data=request.data)
+        # serializer = BookUpdateSerializers(instance=update_book, data=request.data)
+        serializer = self.get_serializer(instance=self.get_object(), data=request.data)
         # 校验数据
-        if serializer.is_valid():  # 通过返回true
-            # Book.objects.filter(pk=id).update(**serializer.validated_data)
-            # # return Response(serializer.data)  直接返回serializer instance 是更新之前的所以相应数据还是更新之前的
-            # updated_book = Book.objects.get(pk=id)  需要再取值
-            # serializer.instance = updated_book  赋值
+        if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         else:
