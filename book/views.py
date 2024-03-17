@@ -173,3 +173,36 @@ class PublishViewToModelsGenericAPIView(GenericAPIView):
             return Response(serializer.data)
         else:
             return Response(serializer.errors)
+
+
+class PublishDetailViewToModelsGenericAPIView(GenericAPIView):
+    queryset = PublishInfo.objects.all()
+    serializer_class = PublishSerializersModelSerializer
+
+    def get(self, request, pk):  # 这里必须要pk   路由也需要指定pk
+        # book = BookInfo.objects.get(pk=id)
+        # serializer = BookSerializers(instance=book, many=False)  # many 一个 False
+        serializer = self.get_serializer(instance=self.get_object(), many=False)  # get_object 方法过滤lookup_field = 'pk'
+
+        return Response(serializer.data)
+
+    def put(self, request, id):
+        # 获取
+        print(request.data)  # 请求参数
+        update_book = BookInfo.objects.get(pk=id)  # 获取数据库准备修改的数据
+        # 校验
+        serializer = BookUpdateSerializers(instance=update_book, data=request.data)
+        # 校验数据
+        if serializer.is_valid():  # 通过返回true
+            # Book.objects.filter(pk=id).update(**serializer.validated_data)
+            # # return Response(serializer.data)  直接返回serializer instance 是更新之前的所以相应数据还是更新之前的
+            # updated_book = Book.objects.get(pk=id)  需要再取值
+            # serializer.instance = updated_book  赋值
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors)
+
+    def delete(self, request, b_id):
+        BookInfo.objects.get(pk=b_id).delete()
+        return Response()
