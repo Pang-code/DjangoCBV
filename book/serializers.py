@@ -16,14 +16,23 @@ from .models import BookInfo
 #     price = serializers.IntegerField()
 #     pub_date = serializers.DateField()
 #     date = serializers.DateField(source="pub_date") # 指定别名
+#     def create(self, validated_data):
+#         new_book = BookInfo.objects.create(**self.validated_data)
+#         return new_book
 #
+#
+#     def update(self, instance, validated_data):
+#         print(456)
+#         BookInfo.objects.filter(pk=instance.pk).update(**validated_data)
+#         updated_book = BookInfo.objects.get(pk=instance.pk)
+#         return updated_book
+
 
 # 针对模型设计的序列化器
 # class BookSerializers(serializers.ModelSerializer):
 #     class Meta:
 #         model = BookInfo
-#         # fields = ["title", "price"]
-#         fields = "__all__"
+
 
 # 针对模型设计的序列化器
 class BaseSerializers(serializers.ModelSerializer):
@@ -33,6 +42,7 @@ class BaseSerializers(serializers.ModelSerializer):
         # fields = "__all__"
 
     def create(self, validated_data):
+        """ModelSerializer自己已经有create方法"""
         print(123)
         new_book = BookInfo.objects.create(**self.validated_data)
         return new_book
@@ -41,11 +51,13 @@ class BaseSerializers(serializers.ModelSerializer):
 class BookSerializers(serializers.ModelSerializer):
     """根据当前行政区划查询详情并把子行政区划查询出来"""
     # 这里subs就是原来的area_set,只是因为当前表关联自身，所以为了避免出现无限嵌套，所以修改名字
+    date = serializers.DateField(source="pub_date")  # 指定别名
     subs = BaseSerializers(many=True, read_only=True)
 
     class Meta:
         model = BookInfo
-        fields = ["id", "title", "price", "pub_date", "subs"]
+        fields = ["id", "title", "price", "date", "subs"]
+        # exclude = ["price"] 排除
 
 
 class BookUpdateSerializers(serializers.ModelSerializer):
@@ -64,6 +76,5 @@ class BookUpdateSerializers(serializers.ModelSerializer):
         return updated_book
 
 
-# BookSerializers(instance,data)
 if __name__ == "__main__":
     pass

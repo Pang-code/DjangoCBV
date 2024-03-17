@@ -70,7 +70,7 @@ POST http://127.0.0.1:8080/bookview/
 Accept: application/json
 
 {
-    "title": "vue快速入门",
+    "title": "jq快速入门",
     "price": 100,
     "pub_date": "2019-06-13"
 }
