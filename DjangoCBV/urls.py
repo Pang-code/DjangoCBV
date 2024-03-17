@@ -30,5 +30,7 @@ urlpatterns = [
     re_path('publish/(?P<pk>\d+)', views.PublishDetailViewToModelsGenericAPIView.as_view()),
     path('author/', views.AuthorViewToModelsGenericAPIView.as_view()),
     re_path('author/(?P<pk>\d+)', views.AuthorDetailViewToModelsGenericAPIView.as_view()),
+    path('authorpro/', views.AuthorMixinViewToModelsGenericAPIView.as_view()),
+    re_path('authorpro/(?P<pk>\d+)', views.AuthorMixinDetailViewToModelsGenericAPIView.as_view()),
 
 ]

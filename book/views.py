@@ -206,8 +206,6 @@ class PublishDetailViewToModelsGenericAPIView(GenericAPIView):
         return Response()
 
 
-
-
 # genericapiview  author 复制修改下类属性就可以复用
 from rest_framework.generics import GenericAPIView
 
@@ -266,5 +264,35 @@ class AuthorDetailViewToModelsGenericAPIView(GenericAPIView):
         return Response()
 
 
+# genericapiview  author 复制修改下类属性就可以复用  mixin类
+from rest_framework.generics import GenericAPIView
+from rest_framework.mixins import ListModelMixin, CreateModelMixin, UpdateModelMixin, DestroyModelMixin, \
+    RetrieveModelMixin
 
 
+class AuthorMixinViewToModelsGenericAPIView(GenericAPIView, ListModelMixin, CreateModelMixin):  # 多继承mixin 封装了方法
+    queryset = AuthorInfo.objects.all()
+    serializer_class = AuthorSerializersModelSerializer
+
+    def get(self, request):
+        return self.list(request)
+
+    def post(self, request):
+        return self.create(request)
+
+
+class AuthorMixinDetailViewToModelsGenericAPIView(GenericAPIView, RetrieveModelMixin, UpdateModelMixin,
+                                                  DestroyModelMixin):
+    queryset = AuthorInfo.objects.all()
+    serializer_class = AuthorSerializersModelSerializer
+
+    def get(self, request, pk):  # 这里必须要pk   路由也需要指定pk
+
+        return self.retrieve(request, pk)
+
+    def put(self, request, pk):
+
+        return self.update(request, pk)
+
+    def delete(self, request, pk):
+        return self.destroy(request, pk)
