@@ -70,9 +70,9 @@ POST http://127.0.0.1:8080/bookview/
 Accept: application/json
 
 {
-    "title": "linux学习手册",
-    "price": 119,
-    "pub_date": "2009-08-13"
+    "title": "vue快速入门",
+    "price": 100,
+    "pub_date": "2019-06-13"
 }
 
 
@@ -83,11 +83,12 @@ Accept: application/json
 
 
 ###
-PUT http://127.0.0.1:8080/bookview/6
+PUT http://127.0.0.1:8080/bookview/13
 Accept: application/json
 
 {
-    "title": "linux学习宝典2"
+    "title": "oracle高级编程3",
+    "price": 289
 }
 
 

@@ -79,6 +79,8 @@ from .serializers import BookSerializers, BaseSerializers, BookUpdateSerializers
 
 
 class BookViewToModels(APIView):
+    """serializers"""
+
     def get(self, request):
         book_list = BookInfo.objects.all()
         print(book_list)
@@ -97,15 +99,20 @@ class BookViewToModels(APIView):
         serializer = BaseSerializers(data=request.data)
         # 校验数据
         if serializer.is_valid():  # 通过返回true
+            # 方法一
             # new_book=Book.objects.create(**serializer.validated_data) #
             # serializer.save(serializer.data)
-            serializer.save()  # serializer.validated_data  校验通过的数据
+            # 方法二
+            serializer.save()  # 调用serializer 的create方法需要自定义一个cteate
+            # serializer.validated_data  校验通过的数据
             return Response(serializer.data)
         else:
             return Response(serializer.errors)
 
 
 class BookDetailViewToModels(APIView):
+    """serializers"""
+
     def get(self, request, id):
         book = BookInfo.objects.get(pk=id)
         serializer = BookSerializers(instance=book, many=False)  # many 一个 False
@@ -120,9 +127,9 @@ class BookDetailViewToModels(APIView):
         # 校验数据
         if serializer.is_valid():  # 通过返回true
             # Book.objects.filter(pk=id).update(**serializer.validated_data)
-            # # return Response(serializer.data)  serializer instance 是更新之前的
-            # updated_book = Book.objects.get(pk=id)
-            # serializer.instance = updated_book
+            # # return Response(serializer.data)  直接返回serializer instance 是更新之前的所以相应数据还是更新之前的
+            # updated_book = Book.objects.get(pk=id)  需要再取值
+            # serializer.instance = updated_book  赋值
             serializer.save()
             return Response(serializer.data)
         else:

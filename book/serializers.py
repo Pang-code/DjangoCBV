@@ -15,6 +15,7 @@ from .models import BookInfo
 #     title = serializers.CharField(max_length=32)
 #     price = serializers.IntegerField()
 #     pub_date = serializers.DateField()
+#     date = serializers.DateField(source="pub_date") # 指定别名
 #
 
 # 针对模型设计的序列化器
@@ -28,8 +29,8 @@ from .models import BookInfo
 class BaseSerializers(serializers.ModelSerializer):
     class Meta:
         model = BookInfo
-        # fields = ["title", "price"]
-        fields = "__all__"
+        fields = ["title", "price", "pub_date", "is_delete", "readcount", "commentcount", "auth", "category"]
+        # fields = "__all__"
 
     def create(self, validated_data):
         print(123)
@@ -54,7 +55,7 @@ class BookUpdateSerializers(serializers.ModelSerializer):
 
     class Meta:
         model = BookInfo
-        fields = ["title", "subs"]
+        fields = ["title", "price", "subs"]
 
     def update(self, instance, validated_data):
         print(456)
