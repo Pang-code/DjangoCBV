@@ -302,6 +302,13 @@ from rest_framework.generics import GenericAPIView
 from rest_framework.mixins import ListModelMixin, CreateModelMixin, UpdateModelMixin, DestroyModelMixin, \
     RetrieveModelMixin
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+# RetrieveDestroyAPIView  获取 删除
+# RetrieveUpdateAPIView 获取 修改
+# UpdateAPIView 修改
+# DestroyAPIView 删除
+# RetrieveAPIView 获取
+# ListAPIView 获取所有
+# CreateAPIView 新建
 
 
 class AuthorGenericMixinViewToModelsGenericAPIView(ListCreateAPIView):  # 多继承mixin 封装了方法
