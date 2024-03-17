@@ -161,3 +161,15 @@ class PublishViewToModelsGenericAPIView(GenericAPIView):
         # self.get_serializer_class()(instance=self.queryset(), many=True) #  self.get_serializer_class() 获取到serializer_class
         serializers = self.get_serializer(instance=self.get_queryset(), many=True)
         return Response(serializers.data)
+
+    def post(self, request):
+        # 反序列化
+        print(request.data)
+        serializer = self.get_serializer(data=request.data)
+        # 校验数据
+        if serializer.is_valid():
+
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors)
