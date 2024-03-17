@@ -141,3 +141,43 @@ DELETE http://127.0.0.1:8080/publish/5
 Accept: application/json
 
 
+
+
+### CBV   rest APIView  db generic  复制 author
+
+### get
+GET http://127.0.0.1:8080/author/
+Accept: application/json
+
+
+###
+POST http://127.0.0.1:8080/author/
+Accept: application/json
+
+{
+    "name": "周树人",
+    "age": 30
+}
+
+
+
+###
+GET http://127.0.0.1:8080/author/2
+Accept: application/json
+
+
+###
+PUT http://127.0.0.1:8080/author/3
+Accept: application/json
+
+{
+    "name": "鲁迅",
+    "age": 30
+}
+
+
+###
+DELETE http://127.0.0.1:8080/author/3
+Accept: application/json
+
+

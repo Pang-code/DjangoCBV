@@ -73,9 +73,10 @@ class BookAPIView(APIView):
         return HttpResponse("del APIView")
 
 
-from .models import BookInfo, PublishInfo
+from .models import BookInfo, PublishInfo, AuthorInfo
 from rest_framework.response import Response
-from .serializers import BookSerializers, BaseSerializers, BookUpdateSerializers, PublishSerializersModelSerializer
+from .serializers import BookSerializers, BaseSerializers, BookUpdateSerializers, PublishSerializersModelSerializer, \
+    AuthorSerializersModelSerializer
 
 
 class BookViewToModels(APIView):
@@ -203,3 +204,67 @@ class PublishDetailViewToModelsGenericAPIView(GenericAPIView):
     def delete(self, request, pk):
         self.get_object().delete()
         return Response()
+
+
+
+
+# genericapiview  author 复制修改下类属性就可以复用
+from rest_framework.generics import GenericAPIView
+
+
+class AuthorViewToModelsGenericAPIView(GenericAPIView):
+    queryset = AuthorInfo.objects.all()
+    serializer_class = AuthorSerializersModelSerializer
+
+    def get(self, request):
+        # serializers = PublishSerializersModelSerializer(instance=self.get_queryset(), many=True)
+
+        # self.get_serializer_class()(instance=self.queryset(), many=True) #  self.get_serializer_class() 获取到serializer_class
+        serializers = self.get_serializer(instance=self.get_queryset(), many=True)
+        return Response(serializers.data)
+
+    def post(self, request):
+        # 反序列化
+        print(request.data)
+        serializer = self.get_serializer(data=request.data)
+        # 校验数据
+        if serializer.is_valid():
+
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors)
+
+
+class AuthorDetailViewToModelsGenericAPIView(GenericAPIView):
+    queryset = AuthorInfo.objects.all()
+    serializer_class = AuthorSerializersModelSerializer
+
+    def get(self, request, pk):  # 这里必须要pk   路由也需要指定pk
+        # book = BookInfo.objects.get(pk=id)
+        # serializer = BookSerializers(instance=book, many=False)  # many 一个 False
+        serializer = self.get_serializer(instance=self.get_object(), many=False)  # get_object 方法过滤lookup_field = 'pk'
+
+        return Response(serializer.data)
+
+    def put(self, request, pk):
+        # 获取
+        print(request.data)  # 请求参数
+        # update_book = BookInfo.objects.get(pk=id)  # 获取数据库准备修改的数据
+        # 校验
+        # serializer = BookUpdateSerializers(instance=update_book, data=request.data)
+        serializer = self.get_serializer(instance=self.get_object(), data=request.data)
+        # 校验数据
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors)
+
+    def delete(self, request, pk):
+        self.get_object().delete()
+        return Response()
+
+
+
+

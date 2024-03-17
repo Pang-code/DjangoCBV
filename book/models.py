@@ -4,7 +4,7 @@ from django.db import models
 # Create your models here.
 
 class AuthorInfo(models.Model):
-    id = models.IntegerField(primary_key=True, auto_created=True, unique=True, verbose_name='作者id')
+    # id = models.IntegerField(primary_key=True, auto_created=True, unique=True, verbose_name='作者id')
     name = models.CharField(max_length=32, verbose_name='标题')
     age = models.IntegerField(verbose_name='年龄', default=18)
     create_time = models.DateTimeField(auto_now_add=True, null=True, verbose_name='创建时间')

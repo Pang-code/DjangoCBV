@@ -7,7 +7,7 @@
 __author__ = 'pangzhaowen'
 
 from rest_framework import serializers
-from .models import BookInfo, PublishInfo
+from .models import BookInfo, PublishInfo, AuthorInfo
 
 
 # 针对模型设计的序列化器
@@ -87,6 +87,13 @@ class PublishSerializersModelSerializer(serializers.ModelSerializer):
     """根据当前行政区划查询详情并把子行政区划查询出来"""
     class Meta:
         model = PublishInfo
+        fields = "__all__"
+
+
+class AuthorSerializersModelSerializer(serializers.ModelSerializer):
+    """根据当前行政区划查询详情并把子行政区划查询出来"""
+    class Meta:
+        model = AuthorInfo
         fields = "__all__"
 
 

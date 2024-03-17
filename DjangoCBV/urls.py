@@ -28,5 +28,7 @@ urlpatterns = [
     path('bookview2/', views.BookViewToModelsGenericAPIView.as_view()),
     path('publish/', views.PublishViewToModelsGenericAPIView.as_view()),
     re_path('publish/(?P<pk>\d+)', views.PublishDetailViewToModelsGenericAPIView.as_view()),
+    path('author/', views.AuthorViewToModelsGenericAPIView.as_view()),
+    re_path('author/(?P<pk>\d+)', views.AuthorDetailViewToModelsGenericAPIView.as_view()),
 
 ]
