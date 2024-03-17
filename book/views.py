@@ -200,6 +200,6 @@ class PublishDetailViewToModelsGenericAPIView(GenericAPIView):
         else:
             return Response(serializer.errors)
 
-    def delete(self, request, b_id):
-        BookInfo.objects.get(pk=b_id).delete()
+    def delete(self, request, pk):
+        self.get_object().delete()
         return Response()
