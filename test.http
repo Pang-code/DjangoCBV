@@ -97,3 +97,47 @@ DELETE http://127.0.0.1:8080/bookview/5
 Accept: application/json
 
 
+
+
+
+
+
+
+### CBV   rest APIView  db generic
+
+### get
+GET http://127.0.0.1:8080/publish/
+Accept: application/json
+
+
+###
+POST http://127.0.0.1:8080/publish/
+Accept: application/json
+
+{
+    "name": "南京出版社",
+    "city": "南京"
+}
+
+
+
+###
+GET http://127.0.0.1:8080/publish/1
+Accept: application/json
+
+
+###
+PUT http://127.0.0.1:8080/publish/4
+Accept: application/json
+
+{
+    "name": "浙江出版社",
+    "city": "浙江市"
+}
+
+
+###
+DELETE http://127.0.0.1:8080/publish/5
+Accept: application/json
+
+
