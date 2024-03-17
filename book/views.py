@@ -73,9 +73,9 @@ class BookAPIView(APIView):
         return HttpResponse("del APIView")
 
 
-from .models import BookInfo
+from .models import BookInfo, PublishInfo
 from rest_framework.response import Response
-from .serializers import BookSerializers, BaseSerializers, BookUpdateSerializers
+from .serializers import BookSerializers, BaseSerializers, BookUpdateSerializers, PublishSerializersModelSerializer
 
 
 class BookViewToModels(APIView):
@@ -138,4 +138,26 @@ class BookDetailViewToModels(APIView):
     def delete(self, request, b_id):
         BookInfo.objects.get(pk=b_id).delete()
         return Response()
+
+
 #
+
+
+# genericapiview
+from rest_framework.generics import GenericAPIView
+
+
+class BookViewToModelsGenericAPIView(GenericAPIView):
+    pass
+
+
+class PublishViewToModelsGenericAPIView(GenericAPIView):
+    queryset = PublishInfo.objects.all()
+    serializer_class = PublishSerializersModelSerializer
+
+    def get(self, request):
+        # serializers = PublishSerializersModelSerializer(instance=self.get_queryset(), many=True)
+
+        # self.get_serializer_class()(instance=self.queryset(), many=True) #  self.get_serializer_class() 获取到serializer_class
+        serializers = self.get_serializer(instance=self.get_queryset(), many=True)
+        return Response(serializers.data)

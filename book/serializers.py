@@ -7,7 +7,7 @@
 __author__ = 'pangzhaowen'
 
 from rest_framework import serializers
-from .models import BookInfo
+from .models import BookInfo, PublishInfo
 
 
 # 针对模型设计的序列化器
@@ -74,6 +74,21 @@ class BookUpdateSerializers(serializers.ModelSerializer):
         BookInfo.objects.filter(pk=instance.pk).update(**validated_data)
         updated_book = BookInfo.objects.get(pk=instance.pk)
         return updated_book
+
+
+class BookSerializersModelSerializer(serializers.ModelSerializer):
+    """根据当前行政区划查询详情并把子行政区划查询出来"""
+    class Meta:
+        model = BookInfo
+        fields = "__all__"
+
+
+class PublishSerializersModelSerializer(serializers.ModelSerializer):
+    """根据当前行政区划查询详情并把子行政区划查询出来"""
+    class Meta:
+        model = PublishInfo
+        fields = "__all__"
+
 
 
 if __name__ == "__main__":
