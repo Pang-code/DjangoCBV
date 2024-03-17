@@ -291,8 +291,24 @@ class AuthorMixinDetailViewToModelsGenericAPIView(GenericAPIView, RetrieveModelM
         return self.retrieve(request, pk)
 
     def put(self, request, pk):
-
         return self.update(request, pk)
 
     def delete(self, request, pk):
         return self.destroy(request, pk)
+
+
+# genericapiview  author 复制修改下类属性就可以复用  mixin类的再封装
+from rest_framework.generics import GenericAPIView
+from rest_framework.mixins import ListModelMixin, CreateModelMixin, UpdateModelMixin, DestroyModelMixin, \
+    RetrieveModelMixin
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+
+
+class AuthorGenericMixinViewToModelsGenericAPIView(ListCreateAPIView):  # 多继承mixin 封装了方法
+    queryset = AuthorInfo.objects.all()
+    serializer_class = AuthorSerializersModelSerializer
+
+
+class AuthorGenericMixinDetailViewToModelsGenericAPIView(RetrieveUpdateDestroyAPIView):
+    queryset = AuthorInfo.objects.all()
+    serializer_class = AuthorSerializersModelSerializer

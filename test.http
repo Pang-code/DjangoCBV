@@ -222,3 +222,45 @@ DELETE http://127.0.0.1:8080/authorpro/7
 Accept: application/json
 
 
+
+
+
+
+### CBV   rest APIView  db generic  复制 author  继承mixin类  generic再封装mixin
+
+### get
+GET http://127.0.0.1:8080/authorplus/
+Accept: application/json
+
+
+###
+POST http://127.0.0.1:8080/authorplus/
+Accept: application/json
+
+{
+    "name": "苏东坡",
+    "age": 48
+}
+
+
+
+###
+GET http://127.0.0.1:8080/authorplus/10
+Accept: application/json
+
+
+###
+PUT http://127.0.0.1:8080/authorplus/10
+Accept: application/json
+
+{
+    "name": "苏轼",
+    "age": 45
+}
+
+
+###
+DELETE http://127.0.0.1:8080/authorplus/10
+Accept: application/json
+
+
